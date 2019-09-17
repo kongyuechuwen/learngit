@@ -1080,4 +1080,15 @@ git push -u origin master
 </pre></div>
 
 
-<p>由于远程库是空的，我们第一次推送master分支时，加上了-u参数，Git不但会把本地的master分支内容推送的远程新的master分支，还会把本地的master分支和远程的master分支关联起来，在以后的推送或者拉取时就可以简化命令。</p></article></body></html>
+<p>由于远程库是空的，我们第一次推送master分支时，加上了-u参数，Git不但会把本地的master分支内容推送的远程新的master分支，还会把本地的master分支和远程的master分支关联起来，在以后的推送或者拉取时就可以简化命令。</p>
+<h2 id="5">第5步：从远程库克隆<a class="headerlink" href="#5" title="Permanent link"></a></h2>
+<p>首先，登陆GitHub，创建一个新的仓库，名字叫<code>gitskills</code>,我们勾选<code>Initialize this repository with a README</code>，这样<code>GitHub</code>会自动为我们创建一个<code>README.md</code>文件。</p>
+<p>现在，远程库已经准备好了，下一步是用命令git clone克隆一个本地库：</p>
+<div class="codehilite"><pre>$ git clone https://github.com/kongyuechuwen/gitskills.git
+$ cd gitskills
+$ ls
+README.md
+</pre></div>
+
+
+<p>也可以用这个地址<code>$ git clone git@github.com:kongyuechuwen/gitskills.git</code></p></article></body></html>
