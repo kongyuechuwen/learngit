@@ -1056,8 +1056,8 @@ body .markdown-body
 .codehilite .il{color:#009999}
 .codehilite .gc{color:#999;background-color:#EAF2F5}
 </style><title>git 学习指南</title></head><body><article class="markdown-body"><h1 id="github">GitHub 学习指南<a class="headerlink" href="#github" title="Permanent link"></a></h1>
-<p>2019年9月16日 开始学习 kongyue
-<a href="https://www.liaoxuefeng.com/wiki/896043488029600/896827951938304">参考廖雪峰的官方网站</a></p>
+<p>2019年9月16日 开始学习 kongyue</p>
+<p><a href="https://www.liaoxuefeng.com/wiki/896043488029600/896827951938304">参考廖雪峰的官方网站</a></p>
 <h2 id="1">1. 创建版本库<a class="headerlink" href="#1" title="Permanent link"></a></h2>
 <div class="codehilite"><pre>win CMD
 $ mkdir learngit
@@ -1075,10 +1075,103 @@ Initialized empty Git repository in /Users/michael/learngit/.git/
 
 <p>通过<code>git init</code>命令把这个目录变成Git可以管理的仓库</p>
 <h2 id="3">3.提交<a class="headerlink" href="#3" title="Permanent link"></a></h2>
-<ol>
-<li>
-<p>用命令git add告诉Git，把文件添加到仓库：</p>
-<p><code>git add</code>
-2. </p>
-</li>
-</ol></article></body></html>
+<h3 id="1git-addgit">(1)用命令git add告诉Git，把文件添加到仓库：<a class="headerlink" href="#1git-addgit" title="Permanent link"></a></h3>
+<div class="codehilite"><pre>$ git add git\ 学习指南.md git\ 学习指南.md
+</pre></div>
+
+
+<h3 id="2git-commit-m-git">(2)用命令git commit -m 告诉Git，把文件提交到仓库：<a class="headerlink" href="#2git-commit-m-git" title="Permanent link"></a></h3>
+<div class="codehilite"><pre>git commit -m &quot;git 学习 新建 增加 提交&quot;
+[master (root-commit) e09fc67] git 学习 新建 增加 提交
+2 files changed, 1109 insertions(+)
+create mode 100644 &quot;git \345\255\246\344\271\240\346\214\207\345\215\227.html&quot;
+create mode 100644 &quot;git \345\255\246\344\271\240\346\214\207\345\215\227.md&quot;
+</pre></div>
+
+
+<h3 id="3git-status">(3)git status 查看目前状态<a class="headerlink" href="#3git-status" title="Permanent link"></a></h3>
+<div class="codehilite"><pre>$ git status
+On branch master
+Changes not staged for commit:
+(use &quot;git add &lt;file&gt;...&quot; to update what will be committed)
+(use &quot;git restore &lt;file&gt;...&quot; to discard changes in working directory)
+    modified:   &quot;git \345\255\246\344\271\240\346\214\207\345\215\227.html&quot;
+    modified:   &quot;git \345\255\246\344\271\240\346\214\207\345\215\227.md&quot;
+
+no changes added to commit (use &quot;git add&quot; and/or &quot;git commit -a&quot;)
+</pre></div>
+
+
+<p>上面的命令输出告诉我们，<code>git 学习指南.md</code> 被修改过了，但还没有准备提交的修改。</p>
+<h3 id="4git-diff">(4)git diff 查看修改后与之前的不同<a class="headerlink" href="#4git-diff" title="Permanent link"></a></h3>
+<div class="codehilite"><pre>$ git diff &#39;git 学习指南.md&#39;
+diff --git &quot;a/git \345\255\246\344\271\240\346\214\207\345\215\227.md&quot; &quot;b/git \345\255\246\344\271\240\346\214\207\345\215\227.md&quot;
+index d045deb..5ce6956 100644
+--- &quot;a/git \345\255\246\344\271\240\346\214\207\345\215\227.md&quot;
++++ &quot;b/git \345\255\246\344\271\240\346\214\207\345\215\227.md&quot;
+@@ -1,6 +1,7 @@
+# GitHub 学习指南
+</pre></div>
+
+
+<p>再次<code>git add</code> <code>git commit</code>,即可。</p>
+<h3 id="5git-log">(5)git log 查看版本历史<a class="headerlink" href="#5git-log" title="Permanent link"></a></h3>
+<div class="codehilite"><pre>$ git log
+commit e9c498254844406e8a16b9ca7f9bf52d5e08f2e5 (HEAD -&gt; master)
+Author: kongyue &lt;wenzheng@whu.edu.cn&gt;
+Date:   Mon Sep 16 20:29:12 2019 +0800
+增加了git diff
+
+commit e09fc678f62015853898c84084f74bc8ddf46eae
+Author: kongyue &lt;wenzheng@whu.edu.cn&gt;
+Date:   Mon Sep 16 20:12:12 2019 +0800
+git 学习 新建 增加 提交
+</pre></div>
+
+
+<h3 id="6git">(6)git 回滚<a class="headerlink" href="#6git" title="Permanent link"></a></h3>
+<p>首先，Git必须知道当前版本是哪个版本，在Git中，用HEAD表示当前版本，也就是最新的提交e9c4&hellip;（注意我的提交ID和你的肯定不一样），上一个版本就是HEAD^，上上一个版本就是HEAD^^，当然往上100个版本写100个^比较容易数不过来，所以写成HEAD~100。</p>
+<p>现在回滚到上一个版本
+git reset &ndash;hard HEAD^</p>
+<div class="codehilite"><pre>$ git reset --hard head^
+HEAD is now at e09fc67 git 学习 新建 增加 提交
+</pre></div>
+
+
+<p>最新的那个版本<code>git diff</code>已经看不到了！好比你从21世纪坐时光穿梭机来到了19世纪，想再回去已经回不去了，肿么办？</p>
+<p>办法其实还是有的，只要上面的命令行窗口还没有被关掉，你就可以顺着往上找啊找啊，找到那个append GPL的commit id是e9c49&hellip;，于是就可以指定回到未来的某个版本：</p>
+<div class="codehilite"><pre>$ git reset --hard e9c49
+HEAD is now at e9c4982 增加了git diff
+</pre></div>
+
+
+<p>Git的版本回退速度非常快，因为Git在内部有个指向当前版本的HEAD指针，当你回退版本的时候，Git仅仅是把HEAD从指向<code>增加了git diff</code>：</p>
+<p>现在，你回退到了某个版本，关掉了电脑，第二天早上就后悔了，想恢复到新版本怎么办？找不到新版本的commit id怎么办？</p>
+<p>在Git中，总是有后悔药可以吃的。当你用$ git reset &ndash;hard HEAD^回退到1版本时，再想恢复到2版本，就必须找到1的commit id。Git提供了一个命令git reflog用来记录你的每一次命令：</p>
+<div class="codehilite"><pre>$ git reflog
+39f2d23 (HEAD -&gt; master) HEAD@{0}: reset: moving to 39f2d
+e9c4982 HEAD@{1}: reset: moving to e9c49
+39f2d23 (HEAD -&gt; master) HEAD@{2}: commit: 2019年9月16日 20点41分 增加了git log
+和git reset
+e09fc67 HEAD@{3}: reset: moving to head^
+e9c4982 HEAD@{4}: commit: 增加了git diff
+e09fc67 HEAD@{5}: commit (initial): git 学习 新建 增加 提交
+</pre></div>
+
+
+<p>现在总结一下：</p>
+<p>HEAD指向的版本就是当前版本，因此，Git允许我们在版本的历史之间穿梭，使用命令git reset &ndash;hard commit_id。</p>
+<p>穿梭前，用git log可以查看提交历史，以便确定要回退到哪个版本。</p>
+<p>要重返未来，用git reflog查看命令历史，以便确定要回到未来的哪个版本。</p>
+<h2 id="_1">工作区和暂存区<a class="headerlink" href="#_1" title="Permanent link"></a></h2>
+<h3 id="working-directory">工作区（Working Directory）<a class="headerlink" href="#working-directory" title="Permanent link"></a></h3>
+<p>就是你在电脑里能看到的目录，比如我的learngit文件夹就是一个工作区。</p>
+<h4 id="repository">版本库（Repository）<a class="headerlink" href="#repository" title="Permanent link"></a></h4>
+<p>工作区有一个隐藏目录.git，这个不算工作区，而是Git的版本库。</p>
+<p>Git的版本库里存了很多东西，其中最重要的就是称为stage（或者叫index）的暂存区，还有Git为我们自动创建的第一个分支master，以及指向master的一个指针叫HEAD。</p>
+<h3 id="_2">暂存区<a class="headerlink" href="#_2" title="Permanent link"></a></h3>
+<p>前面讲了我们把文件往Git版本库里添加的时候，是分两步执行的：</p>
+<p>第一步是用git add把文件添加进去，实际上就是把文件修改添加到暂存区；</p>
+<p>第二步是用git commit提交更改，实际上就是把暂存区的所有内容提交到当前分支。</p>
+<p>因为我们创建Git版本库时，Git自动为我们创建了唯一一个master分支，所以，现在，git commit就是往master分支上提交更改。</p>
+<p>你可以简单理解为，需要提交的文件修改通通放到暂存区，然后，一次性提交暂存区的所有修改。</p></article></body></html>
